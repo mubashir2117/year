@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Year Countdown - VIP Style</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #1b1b1b;
+      color: white;
+    }
+
+    .countdown-container {
+      text-align: center;
+      background: linear-gradient(145deg, #222, #111);
+      padding: 50px;
+      border-radius: 15px;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
+      border: 5px solid rgb(82, 218, 9);
+    }
+
+    h1 {
+      font-family: 'Poppins', serif;
+      margin-bottom: 30px;
+      font-size: 3rem;
+      color: rgb(82, 218, 9);
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      animation: flicker 2s infinite;
+    }
+    
+    #countdown {
+        display: flex;
+        justify-content: space-around;
+        font-size: 2rem;
+    }
+    
+    #countdown div {
+        margin: 0 20px;
+        text-align: center;
+    }
+    
+    #countdown span {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 5rem;
+        display: block;
+        margin-bottom: 10px;
+        color: rgb(82, 218, 9);
+        
+    }
+    
+    #countdown div {
+        font-weight: bolder;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    #countdown span {
+      animation: pulse 1.5s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="countdown-container">
+      <h1>New Year Countdown Till</h1>
+       <h1>2025</h1>
+    <div id="countdown">
+      <div><span id="days"></span>Days</div>
+      <div><span id="hours"></span>Hours</div>
+      <div><span id="minutes"></span>Minutes</div>
+      <div><span id="seconds"></span>Seconds</div>
+    </div>
+  </div>
+
+  <script>
+    // Select countdown elements
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+
+    // New Year date
+    const newYear = new Date(`January 1 ${new Date().getFullYear() + 1} 00:00:00`);
+
+    function updateCountdown() {
+      const currentTime = new Date();
+      const timeDifference = newYear - currentTime;
+
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      // Update the DOM elements
+      daysElement.innerHTML = days;
+      hoursElement.innerHTML = hours < 10 ? '0' + hours : hours;
+      minutesElement.innerHTML = minutes < 10 ? '0' + minutes : minutes;
+      secondsElement.innerHTML = seconds < 10 ? '0' + seconds : seconds;
+    }
+
+    // Initial call
+    updateCountdown();
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
